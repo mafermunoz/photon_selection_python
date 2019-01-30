@@ -17,10 +17,9 @@ pi=np.pi
 
 def main(inputfile,outputpath='/atlas/users/mmunozsa/'):
 
-    f=TFile.Open(inputfile)
+    #f=TFile.Open(inputfile)
     myTree=ROOT.DmpChain("CollectionTree")
-    myTree=("CollectionTree")
-    myTree.Add(f)
+    myTree.Add(inputfile)
     n_entries=myTree.GetEntries()
     print(n_entries)
 
