@@ -22,14 +22,16 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/'):
     myTree.Add(inputfile)
     n_entries=myTree.GetEntries()
     print(n_entries)
-
+    ## Create outputfile
     new_file=outputpath+inputfile.split("/")[-1].replace(".root","_photons.root")
     output_file=TFile(new_file,'recreate')
+    ## Create numpy array where all the iimportant info will be saved
+    output_np=np.zeros(n_entries,dtype[('Energy','float64')])
 
     for i in range (n_entries):
         event=myTree.GetDmpEvent(i)
         print event.pEvtBgoRec().GetTotalEnergy()
-
+        output_np[i]=event.pEvtBgoRec().GetTotalEnergy()
 
 
 
