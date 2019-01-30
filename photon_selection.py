@@ -15,10 +15,11 @@ import glob
 
 pi=np.pi
 
-def main(inputfile,outputpath=''):
+def main(inputfile,outputpath='/atlas/users/mmunozsa/'):
 
     f=TFile.Open(inputfile)
-    myTree=ROOT.DmpChain("CollectionTree")
+    myTree=("CollectionTree")
+    myTree.Add(f)
     n_entries=myTree.GetEntries()
     print(n_entries)
 
