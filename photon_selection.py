@@ -30,9 +30,10 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/'):
 
     for i in range (n_entries):
         event=myTree.GetDmpEvent(i)
-        print event.pEvtBgoRec().GetTotalEnergy()
-        output_np[i]=event.pEvtBgoRec().GetTotalEnergy()
-
+        ene=event.pEvtBgoRec().GetTotalEnergy()
+        output_np[i]=ene
+        core3=event.pEvtBgoRec().GetEnergyCore3()
+        
 
 
 
