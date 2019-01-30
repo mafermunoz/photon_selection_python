@@ -19,6 +19,7 @@ def main(inputfile,outputpath=''):
 
     f=TFile.Open(inputfile)
     myTree=ROOT.DmpChain("CollectionTree")
+    myTree.Add(f)
     n_entries=myTree.GetEntries()
     print(n_entries)
 
