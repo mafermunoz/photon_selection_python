@@ -15,22 +15,19 @@ import glob
 
 pi=np.pi
 
-
-
-
-
 def main(inputfile,outputpath=''):
 
     f=TFile.Open(inputfile)
-    myTree=f.Get("CollectionTree")
+    myTree=ROOT.DmpChain("CollectionTree")
     n_entries=myTree.GetEntries()
     print(n_entries)
 
     new_file=outputpath+inputfile.split("/")[-1].replace(".root","_photons.root")
     output_file=TFile(new_file,'recreate')
 
-    for event in  myTree:
-        print event.GetTotalEnergy()
+    for i in range (n_entries):
+        event=myTree.GetDmpEvent(i)
+        print event.pEvtBgoRec().GetTotalEnergy()
 
 
 
