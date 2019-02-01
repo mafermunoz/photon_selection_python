@@ -14,6 +14,21 @@ import glob
 
 
 pi=np.pi
+N_LAYERS_BGO=14
+
+def elayers(event):
+    d_arr=np.zeros([14])
+    for i in range(N_LAYERS_BGO):
+        d_arr[i]=event.pEvtBgoRec().GetELayer(i)
+        if(d_arr[i]<1):
+            d_arr=-5
+    return d_arr
+
+def max_bar(event):
+    d_arr=np.zeros([14])
+    for i in range (N_LAYERS_BGO):
+        
+
 
 def main(inputfile,outputpath='/atlas/users/mmunozsa/'):
 
@@ -25,6 +40,7 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/'):
     ## Create outputfile
     new_file=outputpath+inputfile.split("/")[-1].replace(".root","_photons.root")
     output_file=TFile(new_file,'recreate')
+    newTree=myTree.CloneTree(0)
     ## Create numpy array where all the iimportant info will be saved
     output_np=np.zeros(n_entries,dtype=[('Energy','float64')])
 
@@ -33,7 +49,7 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/'):
         ene=event.pEvtBgoRec().GetTotalEnergy()
         output_np[i]=ene
         core3=event.pEvtBgoRec().GetEnergyCore3()
-        
+
 
 
 
