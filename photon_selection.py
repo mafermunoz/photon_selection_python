@@ -15,6 +15,7 @@ import glob
 
 pi=np.pi
 N_LAYERS_BGO=14
+N_BARS_BGO=22
 
 def elayers(event):
     d_arr=np.zeros([14])
@@ -24,10 +25,26 @@ def elayers(event):
             d_arr=-5
     return d_arr
 
-def max_bar(event):
+def e_max_bar(event):
     d_arr=np.zeros([14])
     for i in range (N_LAYERS_BGO):
-        
+        d_arr[i]=event.pEvtBgoRec().GetELayerMaxBar(i)
+
+def num_maxlayer(arr):
+        return np.argmax(arr)
+
+
+def num_max_bar(event,e_max):
+    d_arr=np.zeros([14])
+    for i in range (N_LAYERS_BGO):
+        for j in range (N_BARS_BGO):
+            if(e_max[i]=event.pEvtBgoRec().GetEdep(i,j)):
+                d_arr[i]=event.pEvtBgoRec().GetEdep(i,j)
+
+    return d_arr
+
+
+
 
 
 def main(inputfile,outputpath='/atlas/users/mmunozsa/'):
