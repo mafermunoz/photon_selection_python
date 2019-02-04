@@ -19,18 +19,17 @@ N_BARS_BGO=22
 
 def elayers(event):
     d_arr=np.zeros([14])
-    print(event.pEvtBgoRec().GetTotalEnergy())
     for i in range(N_LAYERS_BGO):
-        print(i)
         d_arr[i]=event.pEvtBgoRec().GetELayer(i)
         if(d_arr[i]<1):
-            d_arr=-5
+            d_arr[i]=-5
     return d_arr
 
 def e_max_bar(event):
     d_arr=np.zeros([14])
     for i in range (N_LAYERS_BGO):
         d_arr[i]=event.pEvtBgoRec().GetELayerMaxBar(i)
+
 
 def num_maxlayer(arr):
         return np.argmax(arr)
@@ -69,7 +68,7 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         ene=event.pEvtBgoRec().GetTotalEnergy()
         output_np['Energy'][i]=ene
         core3=event.pEvtBgoRec().GetEnergyCore3()
-        elayers(event)
+        d=elayers(event)
 
 
 
