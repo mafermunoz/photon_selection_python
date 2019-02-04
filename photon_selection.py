@@ -31,7 +31,8 @@ def e_max_bar(event):
         d_arr[i]=event.pEvtBgoRec().GetELayerMaxBar(i)
 
 
-def num_maxlayer(arr):
+def num_maxlayer(event):
+        arr=elayers(event)
         return np.argmax(arr)
 
 
@@ -69,7 +70,9 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         output_np['Energy'][i]=ene
         core3=event.pEvtBgoRec().GetEnergyCore3()
         d=elayers(event)
-        print d
+        dd=e_max_bar(event)
+        aa=num_maxlayer(event)
+        ddd=num_max_bar(event,dd)
 
 
 
