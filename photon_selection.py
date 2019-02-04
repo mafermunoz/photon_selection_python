@@ -29,7 +29,7 @@ def e_max_bar(event):
     d_arr=np.zeros([14])
     for i in range (N_LAYERS_BGO):
         d_arr[i]=event.pEvtBgoRec().GetELayerMaxBar(i)
-
+    return d_arr
 
 def num_maxlayer(event):
         arr=elayers(event)
@@ -72,8 +72,7 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         d=elayers(event)
         dd=e_max_bar(event)
         aa=num_maxlayer(event)
-        print dd
-        #ddd=num_max_bar(event,dd)
+        ddd=num_max_bar(event,dd)
 
 
 
