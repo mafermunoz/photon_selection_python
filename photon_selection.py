@@ -84,7 +84,7 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         core3=event.pEvtBgoRec().GetEnergyCore3()
         ##d=elayers(event)
         ##dd=e_max_bar(event)
-        if (num_maxlayer(event)>4)
+        if (num_maxlayer(event)>4):
             continue
 
         ##ddd=num_max_bar(event,dd)
