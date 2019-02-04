@@ -20,6 +20,7 @@ N_BARS_BGO=22
 def elayers(event):
     d_arr=np.zeros([14])
     for i in range(N_LAYERS_BGO):
+        print(i)
         d_arr[i]=event.pEvtBgoRec().GetELayer(i)
         if(d_arr[i]<1):
             d_arr=-5
