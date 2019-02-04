@@ -18,6 +18,7 @@ N_LAYERS_BGO=int(14)
 N_BARS_BGO=22
 
 def elayers(event):
+    ##Get energy deposited in each layer of BGO
     d_arr=np.zeros([14])
     for i in range(N_LAYERS_BGO):
         d_arr[i]=event.pEvtBgoRec().GetELayer(i)
@@ -25,18 +26,21 @@ def elayers(event):
             d_arr[i]=-5
     return d_arr
 
-def e_max_bar(event):
+def num_max_bar(event):
+    ##Get the bar with the number of the bar with the maximum deposited energy per layer
     d_arr=np.zeros([14])
     for i in range (N_LAYERS_BGO):
         d_arr[i]=event.pEvtBgoRec().GetELayerMaxBar(i)
     return d_arr
 
 def num_maxlayer(event):
+    ##Get the layer with the maximum energy deposited
         arr=elayers(event)
         return np.argmax(arr)
 
 
-def num_max_bar(event,e_max):
+def e_max_bar(event,e_max):
+    ## Get the energy deposited in the BGO bar with the maximum energy deposition for each bar
     d_arr=np.zeros([14])
     for i in range (N_LAYERS_BGO):
         for j in range (N_BARS_BGO):
@@ -46,12 +50,15 @@ def num_max_bar(event,e_max):
     return d_arr
 
 
-def corner_bars(event):
+def corner_bars(event,n=4):
+ ## Returns the number of bars that  have their maximum energy depostion in the corners of the detector, n is the number  of layer we look into(default the fisrt 4 layers due to the typical shower shape of photons)
     e_max_bar(event,)
     num_max_bar(event)
 
 
 def mip_event():
+    #returns the number of layers where the energy deposited is similar to that of a mip_event
+    
 
 
 
