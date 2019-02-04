@@ -46,6 +46,12 @@ def num_max_bar(event,e_max):
     return d_arr
 
 
+def corner_bars(event):
+    e_max_bar(event,)
+    num_max_bar(event)
+
+
+def mip_event():
 
 
 
@@ -69,10 +75,11 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         ene=event.pEvtBgoRec().GetTotalEnergy()
         output_np['Energy'][i]=ene
         core3=event.pEvtBgoRec().GetEnergyCore3()
-        d=elayers(event)
-        dd=e_max_bar(event)
-        aa=num_maxlayer(event)
-        ddd=num_max_bar(event,dd)
+        ##d=elayers(event)
+        ##dd=e_max_bar(event)
+        if (num_maxlayer(event)>4) continue
+
+        ##ddd=num_max_bar(event,dd)
 
 
 
