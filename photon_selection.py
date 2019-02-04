@@ -59,7 +59,8 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
     output_file=TFile(new_file,'recreate')
     newTree=myTree.CloneTree(0)
     ## Create numpy array where all the iimportant info will be saved
-    output_np=np.zeros(n_entries,dtype=[('Energy','float64')])
+    ##output_np=np.zeros(n_entries,dtype=[('Energy','float64')])
+    output_np=np.zeros(n_entries)
 
     for i in range (n_entries):
         event=myTree.GetDmpEvent(i)
