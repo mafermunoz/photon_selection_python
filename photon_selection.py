@@ -38,7 +38,7 @@ def num_max_bar(event,e_max):
     d_arr=np.zeros([14])
     for i in range (N_LAYERS_BGO):
         for j in range (N_BARS_BGO):
-            if(e_max[i]=event.pEvtBgoRec().GetEdep(i,j)):
+            if(e_max[i]==event.pEvtBgoRec().GetEdep(i,j)):
                 d_arr[i]=event.pEvtBgoRec().GetEdep(i,j)
 
     return d_arr
