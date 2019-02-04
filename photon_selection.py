@@ -47,7 +47,7 @@ def num_max_bar(event,e_max):
 
 
 
-def main(inputfile,outputpath='/atlas/users/mmunozsa/'):
+def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
 
     #f=TFile.Open(inputfile)
     myTree=ROOT.DmpChain("CollectionTree")
