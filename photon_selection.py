@@ -14,7 +14,7 @@ import glob
 
 
 pi=np.pi
-N_LAYERS_BGO=14
+N_LAYERS_BGO=int(14)
 N_BARS_BGO=22
 
 def elayers(event):
