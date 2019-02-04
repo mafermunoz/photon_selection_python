@@ -19,6 +19,7 @@ N_BARS_BGO=22
 
 def elayers(event):
     d_arr=np.zeros([14])
+    print(event.pEvtBgoRec().GetTotalEnergy())
     for i in range(N_LAYERS_BGO):
         print(i)
         d_arr[i]=event.pEvtBgoRec().GetELayer(i)
