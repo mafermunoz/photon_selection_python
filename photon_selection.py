@@ -57,8 +57,8 @@ def corner_bars(event,n=4):
 
 
 def mip_event():
-    #returns the number of layers where the energy deposited is similar to that of a mip_event
-
+#returns the number of layers where the energy deposited is similar to that of a mip_event
+    return 0
 
 
 
