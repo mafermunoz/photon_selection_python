@@ -63,8 +63,8 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
 
     for i in range (n_entries):
         event=myTree.GetDmpEvent(i)
-        #ene=
-        print event.pEvtBgoRec().GetTotalEnergy()
+        ene=event.pEvtBgoRec().GetTotalEnergy()
+        print ene
         #output_np[i]=ene
         core3=event.pEvtBgoRec().GetEnergyCore3()
 
