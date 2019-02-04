@@ -58,7 +58,7 @@ def corner_bars(event,n=4):
 
 def mip_event():
     #returns the number of layers where the energy deposited is similar to that of a mip_event
-    
+
 
 
 
@@ -84,7 +84,8 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         core3=event.pEvtBgoRec().GetEnergyCore3()
         ##d=elayers(event)
         ##dd=e_max_bar(event)
-        if (num_maxlayer(event)>4) continue
+        if (num_maxlayer(event)>4)
+            continue
 
         ##ddd=num_max_bar(event,dd)
 
