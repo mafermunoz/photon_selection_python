@@ -73,7 +73,7 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         dd=e_max_bar(event)
         aa=num_maxlayer(event)
         print dd
-        ddd=num_max_bar(event,dd)
+        #ddd=num_max_bar(event,dd)
 
 
 
