@@ -69,6 +69,7 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         output_np['Energy'][i]=ene
         core3=event.pEvtBgoRec().GetEnergyCore3()
         d=elayers(event)
+        print d
 
 
 
