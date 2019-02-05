@@ -52,12 +52,16 @@ def e_max_bar(event,e_max):
 
 def corner_bars(event,n=4):
  ## Returns the number of bars that  have their maximum energy depostion in the corners of the detector, n is the number  of layer we look into(default the fisrt 4 layers due to the typical shower shape of photons)
-    e_max_bar(event,)
+    num_bar_corner=0
+    e_max_bar(event)
     num_max_bar(event)
 
 
 def mip_event():
-#returns the number of layers where the energy deposited is similar to that of a mip_event
+    #returns the number of layers where the energy deposited is similar to that of a mip_event
+    mip=0
+
+
     return 0
 
 
