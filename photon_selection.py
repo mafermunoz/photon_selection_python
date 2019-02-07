@@ -26,7 +26,7 @@ def elayers(event):
             d_arr[i]=-5
     return d_arr
 
-def num_max_bar(event):
+def ene_max_bar(event):
     ##Get the bar with the number of the bar with the maximum deposited energy per layer
     d_arr=np.zeros([14])
     for i in range (N_LAYERS_BGO):
@@ -39,30 +39,37 @@ def num_maxlayer(event):
         return np.argmax(arr)
 
 
-def e_max_bar(event,e_max):
-    ## Get the energy deposited in the BGO bar with the maximum energy deposition for each bar
+def num_max_bar(event):
+    ## Get the bar deposited in the BGO bar with the maximum energy deposition for each bar
+    a=ene_max_bar(event)
     d_arr=np.zeros([14])
     for i in range (N_LAYERS_BGO):
         for j in range (N_BARS_BGO):
-            if(e_max[i]==event.pEvtBgoRec().GetEdep(i,j)):
-                d_arr[i]=event.pEvtBgoRec().GetEdep(i,j)
-
+            if(a[i]==event.pEvtBgoRec().GetEdep(i,j)):
+                #d_arr[i]=event.pEvtBgoRec().GetEdep(i,j)
+                d_arr[i]=j
     return d_arr
 
 
 def corner_bars(event,n=4):
  ## Returns the number of bars that  have their maximum energy depostion in the corners of the detector, n is the number  of layer we look into(default the fisrt 4 layers due to the typical shower shape of photons)
-    num_bar_corner=0
-    e_max_bar(event)
-    num_max_bar(event)
+    x=0
+    d=num_max_bar(event)
+    ene=ene_max_bar(event)
+    for i in range (n):
+        if ((d[i]==1 || d[i]==21) and ene[i]>1):
+            x=x+1
 
-
-def mip_event():
+def mip_event(event):
     #returns the number of layers where the energy deposited is similar to that of a mip_event
     mip=0
-
+    arr=ene_max_bar(event)
+    for i in range (arr):
+        if(arr[i]<55 and arr[i]>1):
+            mip=mip+1
 
     return 0
+
 
 
 
@@ -90,7 +97,8 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         ##dd=e_max_bar(event)
         if (num_maxlayer(event)>4):
             continue
-
+        nTracks=event.pStkTrack.GetLast()+1
+        print nTracks
         ##ddd=num_max_bar(event,dd)
 
 
