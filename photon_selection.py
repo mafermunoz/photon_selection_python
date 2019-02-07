@@ -57,7 +57,7 @@ def corner_bars(event,n=4):
     d=num_max_bar(event)
     ene=ene_max_bar(event)
     for i in range (n):
-        if ((d[i]==1 || d[i]==21) and ene[i]>1):
+        if ((d[i]==0 or d[i]==21) and ene[i]>1):
             x=x+1
 
 def mip_event(event):
