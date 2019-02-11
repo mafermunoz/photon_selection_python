@@ -151,7 +151,7 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         if(min_combined_ene_cut_psd(max_energy_psd)==True):
             continue
         for j in range(nTracks):
-            track=event.pStkKalmanTrack().ConstructedAt(j)
+            track=event.pStkKalmanTrack(j)
             theta_track=track.getDirection().Theta()
 
 
