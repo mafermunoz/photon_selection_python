@@ -96,7 +96,7 @@ def max_ene_psd(event,nhits_psd):
              if(event.pEvtPsdHits.fEnergy[i]>=max_energy_psd[3]):#Change potentially to > onlu wihtout the equal.
                  max_energy_psd[3]=event.pEvtPsdHits.fEnergy[i]
                  psd_max[3]=i
-    return max_energy_psd,psd_max
+    return (max_energy_psd,psd_max)
 
 def min_ene_cut_psd(max_energy_psd,ene_cut=2):
     if(max_energy_psd[0]>ene_cut and max_energy_psd[1]>ene_cut and max_energy_psd[2]>ene_cut and max_energy_psd[3]>ene_cut):
@@ -142,7 +142,7 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         if(nTracks==0): continue
         nhits_psd=event.pEvtPsdRec().GetTotalHits()
         if(nhits_psd>35):continue
-        max_energy_psd,psd_max=max_ene_psd(event,nhits_psd)
+        max_energy_psd, psd_max=max_ene_psd(event,nhits_psd)
         max_energy_psd_y=max_energy_psd[0]+max_energy_psd[1]
         max_energy_psd_x=max_energy_psd[2]+max_energy_psd[3]
 
