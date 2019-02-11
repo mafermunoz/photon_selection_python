@@ -101,13 +101,13 @@ def max_ene_psd(event,nhits_psd):
 def min_ene_cut_psd(max_energy_psd,ene_cut=2):
     if(max_energy_psd[0]>ene_cut and max_energy_psd[1]>ene_cut and max_energy_psd[2]>ene_cut and max_energy_psd[3]>ene_cut):
         return True
-    elif:
+    else:
         return False
 
 def min_combined_ene_cut_psd(max_energy_psd,ene_cut=2):
     if((max_energy_psd[2]+max_energy_psd[3])>=ene_cut and (max_energy_psd[0]+max_energy_psd[1])>=ene_cut):
         return True
-    elif:
+    else:
         return False
 
 def
@@ -150,7 +150,7 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         if(min_combined_ene_cut_psd(max_energy_psd)==True):
             continue
         for j in range(nTracks):
-            
+
 
 
 
