@@ -118,6 +118,15 @@ def track_projection_psd(track):
     projection[3]=track.getDirection().x()*(psd_x2-track.getImpactPoint().z())+track.getImpactPoint().x()
     return projection
 
+def psd_hit_pos(k,event)
+    p=np.zeros(3)#x,y,z
+    p[0]=event.pEvtPsdRec().GetHitX(k)
+    p[1]=event.pEvtPsdRec().GetHitY(k)
+    p[2]=event.pEvtPsdRec().GetHitZ(k)
+    return p
+
+
+
 def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
 
     #f=TFile.Open(inputfile)
@@ -168,7 +177,9 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
             track_psd_projection=track_projection_psd(track)
             if(np.abs(track_psd_projection[2])>=400 or np.abs(track_psd_projection[1])>=400):
                 continue
-            
+            for k in range (nhits_psd):
+                pos_psd_hits=psd_hit_pos(k,event)
+
 
 
 
