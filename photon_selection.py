@@ -110,7 +110,13 @@ def min_combined_ene_cut_psd(max_energy_psd,ene_cut=2):
     else:
         return False
 
-#def
+def track_projection_psd(track):
+    projection=np.zeros(4)#y1,y2,x1,x2
+    projection[0]=track.getDirection().y()*(psd_y1-track.getImpactPoint().z())+track.getImpactPoint().y()
+    projection[1]=track.getDirection().y()*(psd_y2-track.getImpactPoint().z())+track.getImpactPoint().y()
+    projection[2]=track.getDirection().x()*(psd_x1-track.getImpactPoint().z())+track.getImpactPoint().x()
+    projection[3]=track.getDirection().x()*(psd_x2-track.getImpactPoint().z())+track.getImpactPoint().x()
+    return projection
 
 def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
 
@@ -158,6 +164,9 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
             if(plane==0):
                 continue
             if(track.GetNPoints()<(6-plane)):
+                continue
+            track_psd_projection=track_projection_psd(track)
+            if(np.abs(track_psd_projection[2])>=400 or np.abs(track_psd_projection[1])>=400):
                 continue
             
 
