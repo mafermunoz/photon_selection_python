@@ -136,7 +136,7 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         ##dd=e_max_bar(event)
         if (num_maxlayer(event)>4):
             continue
-        nTracks=event.pStkKalmanTrack().GetLast()+1
+        #nTracks=event.pStkKalmanTrack().GetLast()+1
         print nTracks
         if(nTracks==0): continue
         nhits_psd=event.pEvtPsdRec().GetTotalHits()
