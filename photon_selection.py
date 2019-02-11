@@ -155,7 +155,11 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
             track=event.pStkKalmanTrack(j)
             theta_track=track.getDirection().Theta()*180/pi
             plane=track.getImpactPointPlane()
-
+            if(plane==0):
+                continue
+            if(track.GetNPoints()<(6-plane)):
+                continue
+            
 
 
 
