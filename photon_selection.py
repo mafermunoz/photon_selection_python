@@ -136,10 +136,10 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         ##dd=e_max_bar(event)
         if (num_maxlayer(event)>4):
             continue
-        nTracks=event.pStkKalmanTrack.GetLast()+1
+        nTracks=event.pStkKalmanTrack().GetLast()+1
         print nTracks
         if(nTracks==0): continue
-        nhits_psd=event.pEvtPsdRec.GetTotalHits()
+        nhits_psd=event.pEvtPsdRec().GetTotalHits()
         if(nhits_psd>35):continue
         max_energy_psd,psd_max=max_ene_psd(event,nhits_psd)
         max_energy_psd_y=max_energy_psd[0]+max_energy_psd[1]
@@ -150,7 +150,7 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         if(min_combined_ene_cut_psd(max_energy_psd)==True):
             continue
         for j in range(nTracks):
-            track=event.pStkKalmanTrack.ConstructedAt(j)
+            track=event.pStkKalmanTrack().ConstructedAt(j)
             theta_track=track.getDirection().Theta()
 
 
