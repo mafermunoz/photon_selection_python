@@ -141,6 +141,7 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         print nTracks
         if(nTracks==0): continue
         nhits_psd=event.pEvtPsdRec().GetTotalHits()
+        print nhits_psd
         if(nhits_psd>35):continue
         max_energy_psd, psd_max=max_ene_psd(event,nhits_psd)
         max_energy_psd_y=max_energy_psd[0]+max_energy_psd[1]
