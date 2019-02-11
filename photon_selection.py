@@ -16,6 +16,11 @@ import glob
 pi=np.pi
 N_LAYERS_BGO=int(14)
 N_BARS_BGO=22
+psd_y1=-310.7
+psd_y2=-324.7
+psd_x1=-284.5
+psd_x2=-298.5
+BGOz=np.array[58.5,87.5,116.5,145.5,174.5,203.5,232.5,261.5,290.5,319.5,348.5,377.5,406.5,435.5]
 
 def elayers(event):
     ##Get energy deposited in each layer of BGO
@@ -70,8 +75,42 @@ def mip_event(event):
 
     return 0
 
+def max_ene_psd(event,nhits_psd):
+    max_energy_psd=np.zeros(4)#y1,y2,x1,x2
+    psd_max=np.array(-5,-5,-5,-5)
+    for i in range (nhits_psd):
+        z_psd=event.pEvtPsdHits.GetHitZ(i)
+        if(z_psd==psd_y1):
+            if(event.pEvtPsdHits.fEnergy[i]>=max_energy_psd[0]):#Change potentially to > onlu wihtout the equal.
+                max_energy_psd[0]=event.pEvtPsdHits.fEnergy[i]
+                psd_max[0]=i
+        if(z_psd==psd_y2):
+             if(event.pEvtPsdHits.fEnergy[i]>=max_energy_psd[1]):#Change potentially to > onlu wihtout the equal.
+                 max_energy_psd[1]=event.pEvtPsdHits.fEnergy[i]
+                 psd_max[1]=i
+        if(z_psd==psd_x1):
+             if(event.pEvtPsdHits.fEnergy[i]>=max_energy_psd[2]):#Change potentially to > onlu wihtout the equal.
+                 max_energy_psd[2]=event.pEvtPsdHits.fEnergy[i]
+                 psd_max[2]=i
+        if(z_psd==psd_x2):
+             if(event.pEvtPsdHits.fEnergy[i]>=max_energy_psd[3]):#Change potentially to > onlu wihtout the equal.
+                 max_energy_psd[3]=event.pEvtPsdHits.fEnergy[i]
+                 psd_max[3]=i
+    return max_energy_psd,psd_max
 
+def min_ene_cut_psd(max_energy_psd,ene_cut=2):
+    if(max_energy_psd[0]>ene_cut and max_energy_psd[1]>ene_cut and max_energy_psd[2]>ene_cut and max_energy_psd[3]>ene_cut):
+        return True
+    elif:
+        return False
 
+def min_combined_ene_cut_psd(max_energy_psd,ene_cut=2):
+    if((max_energy_psd[2]+max_energy_psd[3])>=ene_cut and (max_energy_psd[0]+max_energy_psd[1])>=ene_cut):
+        return True
+    elif:
+        return False
+
+def
 
 def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
 
@@ -97,9 +136,21 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
         ##dd=e_max_bar(event)
         if (num_maxlayer(event)>4):
             continue
-        nTracks=event.pStkTrack.GetLast()+1
+        nTracks=event.pStkKalmanTrack.GetLast()+1
         print nTracks
-        ##ddd=num_max_bar(event,dd)
+        if(nTracks==0): continue
+        nhits_psd=event.pEvtPsdRec.GetTotalHits()
+        if(nhits_psd>35):continue
+        max_energy_psd,psd_max=max_ene_psd(event,nhits_psd)
+        max_energy_psd_y=max_energy_psd[0]+max_energy_psd[1]
+        max_energy_psd_x=max_energy_psd[2]+max_energy_psd[3]
+
+        if(min_ene_cut_psd(max_energy_psd)==True):##I dont think this cut is relevant if I have the value afterwards
+            continue
+        if(min_combined_ene_cut_psd(max_energy_psd)==True):
+            continue
+        for j in range(nTracks):
+            
 
 
 
