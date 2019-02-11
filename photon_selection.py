@@ -79,22 +79,22 @@ def max_ene_psd(event,nhits_psd):
     max_energy_psd=np.zeros(4)#y1,y2,x1,x2
     psd_max=np.array([-5,-5,-5,-5])
     for i in range (nhits_psd):
-        z_psd=event.pEvtPsdHits.GetHitZ(i)
+        z_psd=event.pEvtPsdHits().GetHitZ(i)
         if(z_psd==psd_y1):
-            if(event.pEvtPsdHits.fEnergy[i]>=max_energy_psd[0]):#Change potentially to > onlu wihtout the equal.
-                max_energy_psd[0]=event.pEvtPsdHits.fEnergy[i]
+            if(event.pEvtPsdHits().fEnergy[i]>=max_energy_psd[0]):#Change potentially to > onlu wihtout the equal.
+                max_energy_psd[0]=event.pEvtPsdHits().fEnergy[i]
                 psd_max[0]=i
         if(z_psd==psd_y2):
-             if(event.pEvtPsdHits.fEnergy[i]>=max_energy_psd[1]):#Change potentially to > onlu wihtout the equal.
-                 max_energy_psd[1]=event.pEvtPsdHits.fEnergy[i]
+             if(event.pEvtPsdHits().fEnergy[i]>=max_energy_psd[1]):#Change potentially to > onlu wihtout the equal.
+                 max_energy_psd[1]=event.pEvtPsdHits().fEnergy[i]
                  psd_max[1]=i
         if(z_psd==psd_x1):
-             if(event.pEvtPsdHits.fEnergy[i]>=max_energy_psd[2]):#Change potentially to > onlu wihtout the equal.
-                 max_energy_psd[2]=event.pEvtPsdHits.fEnergy[i]
+             if(event.pEvtPsdHits().fEnergy[i]>=max_energy_psd[2]):#Change potentially to > onlu wihtout the equal.
+                 max_energy_psd[2]=event.pEvtPsdHits().fEnergy[i]
                  psd_max[2]=i
         if(z_psd==psd_x2):
-             if(event.pEvtPsdHits.fEnergy[i]>=max_energy_psd[3]):#Change potentially to > onlu wihtout the equal.
-                 max_energy_psd[3]=event.pEvtPsdHits.fEnergy[i]
+             if(event.pEvtPsdHits().fEnergy[i]>=max_energy_psd[3]):#Change potentially to > onlu wihtout the equal.
+                 max_energy_psd[3]=event.pEvtPsdHits().fEnergy[i]
                  psd_max[3]=i
     return (max_energy_psd,psd_max)
 
