@@ -77,7 +77,7 @@ def mip_event(event):
 
 def max_ene_psd(event,nhits_psd):
     max_energy_psd=np.zeros(4)#y1,y2,x1,x2
-    psd_max=np.array(-5,-5,-5,-5)
+    psd_max=np.array([-5,-5,-5,-5])
     for i in range (nhits_psd):
         z_psd=event.pEvtPsdHits.GetHitZ(i)
         if(z_psd==psd_y1):
