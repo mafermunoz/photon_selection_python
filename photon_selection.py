@@ -138,13 +138,14 @@ def match_track_psd_cross_max(match,k,psd_max):
     else:
         return 0
 
-def match_track_psd_cross_noise(match,k,energy_cut):
-    if(match==True and ()):
+def match_track_psd_cross_noise(match,k,energy_cut=0.3):
+    if(match==True and (event.pEvtPsdHits().fEnergy[k])<=energy_cut):
         return 1
     else:
         return 0
+
 def match_track_psd_count_psd_hits(match,k,):
-    if(match==True and ()):
+    if(match==True):
         return 1
     else:
         return 0
