@@ -118,12 +118,36 @@ def track_projection_psd(track):
     projection[3]=track.getDirection().x()*(psd_x2-track.getImpactPoint().z())+track.getImpactPoint().x()
     return projection
 
-def psd_hit_pos(k,event)
+def psd_hit_pos(k,event):
     p=np.zeros(3)#x,y,z
     p[0]=event.pEvtPsdRec().GetHitX(k)
     p[1]=event.pEvtPsdRec().GetHitY(k)
     p[2]=event.pEvtPsdRec().GetHitZ(k)
     return p
+
+
+def match_track_psd(pos_psd_hit,track_projection,window=18):
+    if(pos_psd_hit<(track_projection+window) and (pos_psd_hit>(track_projection-window))):
+        return True
+    else:
+        return False
+
+def match_track_psd_cross_max(match,k,psd_max):
+    if (match==True and (psd_max==k)):
+        return 1
+    else:
+        return 0
+
+def match_track_psd_cross_noise(match,k,energy_cut):
+    if(match==True and ()):
+        return 1
+    else:
+        return 0
+def match_track_psd_count_psd_hits(match,k,):
+    if(match==True and ()):
+        return 1
+    else:
+        return 0
 
 
 
@@ -179,7 +203,14 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
                 continue
             for k in range (nhits_psd):
                 pos_psd_hits=psd_hit_pos(k,event)
-
+                if(pos_psd_hits[2]==psd_y1):
+                    match=match_track_psd(pos_psd_hits[1],track_psd_projection[0])
+                if(pos_psd_hits[2]==psd_y2):
+                    match=match_track_psd(pos_psd_hits[1],track_psd_projection[1])
+                if(pos_psd_hits[2]==psd_x1):
+                    match=match_track_psd(pos_psd_hits[0],track_psd_projection[2])
+                if(pos_psd_hits[2]==psd_x2):
+                    match=match_track_psd(pos_psd_hits[0],track_psd_projection[3])
 
 
 
