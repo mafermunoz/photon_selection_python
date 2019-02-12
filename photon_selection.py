@@ -246,9 +246,9 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
                 if(np.abs(bgo_stk_proj[0])>300 or np.abs(bgo_stk_proj[1])>300):
                     continue
                 for l in range (num_maxlayer+2):
-                    
 
-        print  i
+
+        print i
 if __name__ == '__main__':
 
     main(sys.argv[1])
