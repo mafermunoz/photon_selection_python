@@ -120,9 +120,9 @@ def track_projection_psd(track):
 
 def psd_hit_pos(k,event):
     p=np.zeros(3)#x,y,z
-    p[0]=event.pEvtPsdRec().GetHitX(k)
-    p[1]=event.pEvtPsdRec().GetHitY(k)
-    p[2]=event.pEvtPsdRec().GetHitZ(k)
+    p[0]=event.pEvtPsdHits().GetHitX(k)
+    p[1]=event.pEvtPsdHits().GetHitY(k)
+    p[2]=event.pEvtPsdHits().GetHitZ(k)
     return p
 
 
