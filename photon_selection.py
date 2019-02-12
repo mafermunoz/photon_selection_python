@@ -241,11 +241,11 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
                 if((counter_psd[0]-counter_psd[1])>1):
                     continue
 
-                bgo_stk_proj=track_bgo_projection(track,num_maxlayer)
+                bgo_stk_proj=track_bgo_projection(track,num_maxlayer(event))
 
                 if(np.abs(bgo_stk_proj[0])>300 or np.abs(bgo_stk_proj[1])>300):
                     continue
-                for l in range (num_maxlayer+2):
+                for l in range (num_maxlayer(event)+2):
                     a=l
 
         print i
