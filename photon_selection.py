@@ -117,6 +117,12 @@ def track_projection_psd(track):
     projection[2]=track.getDirection().x()*(psd_x1-track.getImpactPoint().z())+track.getImpactPoint().x()
     projection[3]=track.getDirection().x()*(psd_x2-track.getImpactPoint().z())+track.getImpactPoint().x()
     return projection
+def track_bgo_projection(track,num_maxlayer):
+    p=np.zeros(2)
+    p[0]=track.getDirection().x()*(BGOz[num_maxlayer]-track.getImpactPoint().z())+track.getImpactPoint().x()
+    p[1]=track.getDirection().y()*(BGOz[num_maxlayer]-track.getImpactPoint().z())+track.getImpactPoint().y()
+    return p
+
 
 def psd_hit_pos(k,event):
     p=np.zeros(3)#x,y,z
@@ -144,7 +150,7 @@ def match_track_psd_cross_noise(match,k,energy_cut=0.3):
     else:
         return 0
 
-def match_track_psd_count_psd_hits(match,k,):
+def match_track_psd_count_psd_hits(match,k):
     if(match==True):
         return 1
     else:
@@ -178,10 +184,10 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
             continue
         nTracks=event.NStkKalmanTrack()
         #nTracks=
-        print nTracks
+        #print nTracks
         if(nTracks==0): continue
         nhits_psd=event.pEvtPsdRec().GetTotalHits()
-        print nhits_psd
+        #print nhits_psd
         if(nhits_psd>35):continue
         max_energy_psd, psd_max=max_ene_psd(event,nhits_psd)
         max_energy_psd_y=max_energy_psd[0]+max_energy_psd[1]
@@ -202,20 +208,47 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
             track_psd_projection=track_projection_psd(track)
             if(np.abs(track_psd_projection[2])>=400 or np.abs(track_psd_projection[1])>=400):
                 continue
+            counter_psd=np.zeros(3)
             for k in range (nhits_psd):
                 pos_psd_hits=psd_hit_pos(k,event)
                 if(pos_psd_hits[2]==psd_y1):
                     match=match_track_psd(pos_psd_hits[1],track_psd_projection[0])
+                    counter_psd[0]=counter_psd[0]+match_track_psd_cross_max(match,k,psd_max[0])
+                    counter_psd[1]=counter_psd[1]+match_track_psd_cross_noise(match,k)
+                    counter_psd[2]=counter_psd[2]+match_track_psd_count_psd_hits(match,k)
+
                 if(pos_psd_hits[2]==psd_y2):
                     match=match_track_psd(pos_psd_hits[1],track_psd_projection[1])
+                    counter_psd[0]=counter_psd[0]+match_track_psd_cross_max(match,k,psd_max[1])
+                    counter_psd[1]=counter_psd[1]+match_track_psd_cross_noise(match,k)
+                    counter_psd[2]=counter_psd[2]+match_track_psd_count_psd_hits(match,k)
+
                 if(pos_psd_hits[2]==psd_x1):
                     match=match_track_psd(pos_psd_hits[0],track_psd_projection[2])
+                    counter_psd[0]=counter_psd[0]+match_track_psd_cross_max(match,k,psd_max[2])
+                    counter_psd[1]=counter_psd[1]+match_track_psd_cross_noise(match,k)
+                    counter_psd[2]=counter_psd[2]+match_track_psd_count_psd_hits(match,k)
+
                 if(pos_psd_hits[2]==psd_x2):
                     match=match_track_psd(pos_psd_hits[0],track_psd_projection[3])
+                    counter_psd[0]=counter_psd[0]+match_track_psd_cross_max(match,k,psd_max[3])
+                    counter_psd[1]=counter_psd[1]+match_track_psd_cross_noise(match,k)
+                    counter_psd[2]=counter_psd[2]+match_track_psd_count_psd_hits(match,k)
 
+                crossing=counter_psd[2]-counter_psd[1]
+                if(crossing>0):
+                    continue
+                if((counter_psd[0]-counter_psd[1])>1):
+                    continue
 
+                bgo_stk_proj=track_bgo_projection(track,num_maxlayer)
 
+                if(np.abs(bgo_stk_proj[0])>300 or np.abs(bgo_stk_proj[1])>300):
+                    continue
+                for l in range (num_maxlayer+2):
+                    
 
+        print  i
 if __name__ == '__main__':
 
     main(sys.argv[1])
