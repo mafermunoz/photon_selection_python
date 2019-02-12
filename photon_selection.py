@@ -144,7 +144,7 @@ def match_track_psd_cross_max(match,k,psd_max):
     else:
         return 0
 
-def match_track_psd_cross_noise(match,k,energy_cut=0.3):
+def match_track_psd_cross_noise(match,k,event,energy_cut=0.3):
     if(match==True and (event.pEvtPsdHits().fEnergy[k])<=energy_cut):
         return 1
     else:
@@ -214,25 +214,25 @@ def main(inputfile,outputpath='/atlas/users/mmunozsa/photon_selection_python'):
                 if(pos_psd_hits[2]==psd_y1):
                     match=match_track_psd(pos_psd_hits[1],track_psd_projection[0])
                     counter_psd[0]=counter_psd[0]+match_track_psd_cross_max(match,k,psd_max[0])
-                    counter_psd[1]=counter_psd[1]+match_track_psd_cross_noise(match,k)
+                    counter_psd[1]=counter_psd[1]+match_track_psd_cross_noise(match,k,event)
                     counter_psd[2]=counter_psd[2]+match_track_psd_count_psd_hits(match,k)
 
                 if(pos_psd_hits[2]==psd_y2):
                     match=match_track_psd(pos_psd_hits[1],track_psd_projection[1])
                     counter_psd[0]=counter_psd[0]+match_track_psd_cross_max(match,k,psd_max[1])
-                    counter_psd[1]=counter_psd[1]+match_track_psd_cross_noise(match,k)
+                    counter_psd[1]=counter_psd[1]+match_track_psd_cross_noise(match,k,event)
                     counter_psd[2]=counter_psd[2]+match_track_psd_count_psd_hits(match,k)
 
                 if(pos_psd_hits[2]==psd_x1):
                     match=match_track_psd(pos_psd_hits[0],track_psd_projection[2])
                     counter_psd[0]=counter_psd[0]+match_track_psd_cross_max(match,k,psd_max[2])
-                    counter_psd[1]=counter_psd[1]+match_track_psd_cross_noise(match,k)
+                    counter_psd[1]=counter_psd[1]+match_track_psd_cross_noise(match,k,event)
                     counter_psd[2]=counter_psd[2]+match_track_psd_count_psd_hits(match,k)
 
                 if(pos_psd_hits[2]==psd_x2):
                     match=match_track_psd(pos_psd_hits[0],track_psd_projection[3])
                     counter_psd[0]=counter_psd[0]+match_track_psd_cross_max(match,k,psd_max[3])
-                    counter_psd[1]=counter_psd[1]+match_track_psd_cross_noise(match,k)
+                    counter_psd[1]=counter_psd[1]+match_track_psd_cross_noise(match,k,event)
                     counter_psd[2]=counter_psd[2]+match_track_psd_count_psd_hits(match,k)
 
                 crossing=counter_psd[2]-counter_psd[1]
